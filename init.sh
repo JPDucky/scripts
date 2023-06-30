@@ -1,5 +1,6 @@
 #!/bin/bash
-
+set -x 
+set -e
 # This script is for deploying my dotfiles to a new system.
 NVIM_URL=https://github.com/JPDucky/nvim.git
 NVIM_DIR=$HOME/.config/nvim
