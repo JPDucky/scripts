@@ -70,9 +70,10 @@ for package in ${PACKAGES[@]}; do
             *)
                 echo "No package manager found!"
                 echo "Please install neovim, git, curl, and zsh"
-                exit 1
                 ;;
         esac
+    fi
+done
 echo "Packages installed!"
 echo "Installing dotfiles now..."
 
