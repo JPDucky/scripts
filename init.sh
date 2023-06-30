@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script is for deploying my dotfiles to a new system.
 NVIM_URL=https://github.com/JPDucky/nvim.git
