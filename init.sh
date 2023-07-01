@@ -1,6 +1,6 @@
 #!/bin/sh
 # uncomment the line below to debug this script
-set -x 
+#set -x 
 original_dir=$(pwd)
 # This script is for deploying my dotfiles to a new system.
 # neovim, git, curl, and zsh are required for this script to work.
@@ -150,7 +150,6 @@ while [ ! -f .jpducky_nvim ]; do
 done
 sleep 2
 echo "dotfiles installed!"
-
 sleep 2
 echo "Checking shell"
 zsh_path=$(which zsh)
@@ -160,7 +159,6 @@ else
     echo "Changing shell to zsh"
     chsh -s $zsh_path
 fi
-
 echo "Checking editor"
 if [[ $EDITOR == "nvim" ]]; then
     echo "Editor is already nvim"
@@ -168,6 +166,5 @@ else
     echo "Changing editor to nvim"
     export EDITOR=nvim
 fi
-
 echo "Done!"
 exit 0
