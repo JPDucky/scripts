@@ -114,7 +114,7 @@ for package in ${PACKAGES[@]}; do
 done
 echo "Packages installed!"
 
-
+sleep 3
 # install dotfiles
 echo "Installing dotfiles:"
 echo "Installing zsh config"
@@ -130,6 +130,7 @@ while [ ! -f .jpducky_zsh ]; do
     touch .jpducky_zsh
 done
 
+sleep 2
 echo "Installing neovim config"
 while [ ! -f .jpducky_nvim ]; do
     git clone $NVIM_URL $NVIM_DIR
@@ -142,10 +143,10 @@ while [ ! -f .jpducky_nvim ]; do
     cd $original_dir
     touch .jpducky_nvim
 done
-
+sleep 2
 echo "dotfiles installed!"
 
-
+sleep 2
 echo "Checking shell"
 zsh_path=$(which zsh)
 if [[ $SHELL ==  $zsh_path ]]; then
