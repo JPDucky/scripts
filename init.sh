@@ -127,6 +127,7 @@ while [ ! -f .jpducky_zsh ]; do
     cd $ZSH_DIR
     ./init.sh
     cd $original_dir
+    touch .jpducky_zsh
 done
 
 echo "Installing neovim config"
@@ -139,6 +140,7 @@ while [ ! -f .jpducky_nvim ]; do
     cd $NVIM_DIR
     ./init.sh
     cd $original_dir
+    touch .jpducky_nvim
 done
 
 echo "dotfiles installed!"
