@@ -65,7 +65,6 @@ for package in ${PACKAGES[@]}; do
                 sudo apt install -y $package
                 echo "installing $package"
             fi
-            fi
             ;;
         yum)
             if yum list installed $package &> /dev/null; then
@@ -73,7 +72,6 @@ for package in ${PACKAGES[@]}; do
             else
                 sudo yum install -y $package
                 echo "installing $package"
-            fi
             fi
             ;;
         zypper)
@@ -83,7 +81,6 @@ for package in ${PACKAGES[@]}; do
                 sudo zypper install -y $package
                 echo "installing $package"
             fi
-            fi
             ;;
         pamac)
             if pamac list installed $package &> /dev/null; then
@@ -92,7 +89,6 @@ for package in ${PACKAGES[@]}; do
                 sudo pamac install -y $package
                 echo "installing $package"
             fi
-            fi
             ;;
         pacman)
             if pacman -Qs $package &> /dev/null; then
@@ -100,7 +96,6 @@ for package in ${PACKAGES[@]}; do
             else
                 sudo pacman -S --noconfirm $package
                 echo "installing $package"
-            fi
             fi
             ;;
         nixos-rebuild)
