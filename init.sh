@@ -1,4 +1,5 @@
 #!/bin/sh
+# uncomment the line below to debug this script
 set -x 
 original_dir=$(pwd)
 # This script is for deploying my dotfiles to a new system.
@@ -118,17 +119,21 @@ sleep 3
 # install dotfiles
 echo "Installing dotfiles:"
 echo "Installing zsh config"
-while [ ! -f .jpducky_zsh ]; do
-    git clone $ZSH_URL $ZSH_DIR
-    if [ $? -ne 0 ]; then
-        echo "Failed to clone zsh config"
-        exit 1
-    fi
-    cd $ZSH_DIR
-    . ./init.sh
-    cd $original_dir
-    touch .jpducky_zsh
-done
+if [ ! -d $ZSH_URL/.git ]; then
+    while [ ! -f .jpducky_zsh ]; do
+        git clone $ZSH_URL $ZSH_DIR
+        if [ $? -ne 0 ]; then
+            echo "Failed to clone zsh config"
+            exit 1
+        fi
+        cd $ZSH_DIR
+        . ./init.sh
+        cd $original_dir
+        touch .jpducky_zsh
+    done
+else 
+    echo "a git repo already exists in this directory!"
+fi
 
 sleep 2
 echo "Installing neovim config"
