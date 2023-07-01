@@ -1,5 +1,5 @@
 #!/bin/sh
-#set -x 
+set -x 
 original_dir=$(pwd)
 # This script is for deploying my dotfiles to a new system.
 # neovim, git, curl, and zsh are required for this script to work.
@@ -125,7 +125,7 @@ while [ ! -f .jpducky_zsh ]; do
         exit 1
     fi
     cd $ZSH_DIR
-    ./init.sh
+    . ./init.sh
     cd $original_dir
     touch .jpducky_zsh
 done
@@ -139,7 +139,7 @@ while [ ! -f .jpducky_nvim ]; do
         exit 1
     fi
     cd $NVIM_DIR
-    ./init.sh
+    . ./init.sh
     cd $original_dir
     touch .jpducky_nvim
 done
