@@ -151,18 +151,35 @@ echo "dotfiles installed!"
 sleep 2
 echo "Checking shell"
 zsh_path=$(which zsh)
-#if [[ $SHELL ==  $zsh_path ]]; then
-#    echo "Shell is already zsh"
-#else
-#    echo "Changing shell to zsh"
-#    chsh -s $zsh_path
-#fi
-#echo "Checking editor"
-#if [[ $EDITOR == "nvim" ]]; then
-#    echo "Editor is already nvim"
-#else
-#    echo "Changing editor to nvim"
-#    export EDITOR=nvim
-#fi
+if [[ $SHELL ==  $zsh_path ]]; then
+    echo "Shell is already zsh"
+else
+    if [[ $PKG_MGR == nixos-rebuild ]]; then
+        echo "Adding zsh to systemPackages"
+        config_file=/etc/nixos/configuration.nix
+        if ! grep -q zsh $config_file; then
+            sudo sed -i "/environment.systemPackages = with pkgs; \[/a \  zsh" $config_file
+            sudo nixos-rebuild switch
+        fi
+    else
+        echo "Changing shell to zsh"
+        chsh -s $zsh_path
+    fi
+fi
+echo "Checking editor"
+if [[ $EDITOR == "nvim" ]]; then
+    echo "Editor is already nvim"
+else
+    if [[ $PKG_MGR == nixos-rebuild ]]; then
+        echo "Changing editor to nvim"
+        config_file=/etc/nixos/configuration.nix
+        if ! grep -q nvim $config_file; then
+            sudo sed -i "/environment.systemPackages = with pkgs; \[/a \  neovim" $config_file
+            sudo nixos-rebuild switch
+        fi
+    else
+        echo "Changing editor to nvim"
+        export EDITOR=nvim
+fi
 echo "Done!"
 exit 0
