@@ -36,11 +36,11 @@ for command in $PKG_MGR; do
     then 
         PKG_MGR=$command
         break
-    else
-        echo "The script cannot determine your package manager"
-        echo "Please install neovim, git, curl, and zsh, \nand create an issue or a PR to add your package manager"
-        echo "You can do so here: https://github.com/JPDucky/scripts"
-        exit 1
+#    else
+#        echo "The script cannot determine your package manager"
+#        echo "Please install neovim, git, curl, and zsh, \nand create an issue or a PR to add your package manager"
+#        echo "You can do so here: https://github.com/JPDucky/scripts"
+#        exit 1
     fi
 done
 
