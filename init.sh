@@ -147,11 +147,12 @@ echo "dotfiles installed!"
 
 
 echo "Checking shell"
-if [[ $SHELL == "/usr/bin/zsh" ]]; then
+zsh_path=$(which zsh)
+if [[ $SHELL ==  $zsh_path ]]; then
     echo "Shell is already zsh"
 else
     echo "Changing shell to zsh"
-    chsh -s /usr/bin/zsh
+    chsh -s $zsh_path
 fi
 
 echo "Checking editor"
