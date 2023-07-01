@@ -151,18 +151,18 @@ echo "dotfiles installed!"
 sleep 2
 echo "Checking shell"
 zsh_path=$(which zsh)
-if [[ $SHELL ==  $zsh_path ]]; then
-    echo "Shell is already zsh"
-else
-    echo "Changing shell to zsh"
-    chsh -s $zsh_path
-fi
-echo "Checking editor"
-if [[ $EDITOR == "nvim" ]]; then
-    echo "Editor is already nvim"
-else
-    echo "Changing editor to nvim"
-    export EDITOR=nvim
-fi
+#if [[ $SHELL ==  $zsh_path ]]; then
+#    echo "Shell is already zsh"
+#else
+#    echo "Changing shell to zsh"
+#    chsh -s $zsh_path
+#fi
+#echo "Checking editor"
+#if [[ $EDITOR == "nvim" ]]; then
+#    echo "Editor is already nvim"
+#else
+#    echo "Changing editor to nvim"
+#    export EDITOR=nvim
+#fi
 echo "Done!"
 exit 0
