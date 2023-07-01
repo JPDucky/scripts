@@ -49,70 +49,68 @@ done
 # depending on which package manager is found, install packages
 echo "Package manager $PKG_MGR found!"
 echo "Installing packages now..."
-for package in ${PACKAGES[@]}; do 
-    case $PKG_MGR in
-        dnf)
-            if dnf list installed $package &> /dev/null; then
-                echo "$package already installed"
-            else
-                sudo dnf install -y $package
-                echo "installing $package"
-            fi
-            ;;
-        apt)
-            if dpkg -s $package &> /dev/null; then
-                echo "$package already installed"
-            else
-                sudo apt install -y $package
-                echo "installing $package"
-            fi
-            ;;
-        yum)
-            if yum list installed $package &> /dev/null; then
-                echo "$package already installed"
-            else
-                sudo yum install -y $package
-                echo "installing $package"
-            fi
-            ;;
-        zypper)
-            if zypper if $package &> /dev/null; then
-                echo "$package already installed"
-            else
-                sudo zypper install -y $package
-                echo "installing $package"
-            fi
-            ;;
-        pamac)
-            if pamac list installed $package &> /dev/null; then
-                echo "$package already installed"
-            else
-                sudo pamac install -y $package
-                echo "installing $package"
-            fi
-            ;;
-        pacman)
-            if pacman -Qs $package &> /dev/null; then
-                echo "$package already installed"
-            else
-                sudo pacman -S --noconfirm $package
-                echo "installing $package"
-            fi
-            ;;
-        nixos-rebuild)
-            config_file=/etc/nixos/configuration.nix
-            if ! grep -q $package $config_file; then
-                echo "Installing $package"
-                sudo sed -i "/environment.systemPackages = with pkgs; \[/a \  $package" $config_file
-            fi
-            sudo nixos-rebuild switch 
-            ;;
-        *)
-            echo "No package manager found!"
-            echo "Please install neovim, git, curl, and zsh"
-            ;;
-    esac
-done
+case $PKG_MGR in
+    dnf)
+        if dnf list installed $package &> /dev/null; then
+            echo "$package already installed"
+        else
+            sudo dnf install -y $package
+            echo "installing $package"
+        fi
+        ;;
+    apt)
+        if dpkg -s $package &> /dev/null; then
+            echo "$package already installed"
+        else
+            sudo apt install -y $package
+            echo "installing $package"
+        fi
+        ;;
+    yum)
+        if yum list installed $package &> /dev/null; then
+            echo "$package already installed"
+        else
+            sudo yum install -y $package
+            echo "installing $package"
+        fi
+        ;;
+    zypper)
+        if zypper if $package &> /dev/null; then
+            echo "$package already installed"
+        else
+            sudo zypper install -y $package
+            echo "installing $package"
+        fi
+        ;;
+    pamac)
+        if pamac list installed $package &> /dev/null; then
+            echo "$package already installed"
+        else
+            sudo pamac install -y $package
+            echo "installing $package"
+        fi
+        ;;
+    pacman)
+        if pacman -Qs $package &> /dev/null; then
+            echo "$package already installed"
+        else
+            sudo pacman -S --noconfirm $package
+            echo "installing $package"
+        fi
+        ;;
+    nixos-rebuild)
+        config_file=/etc/nixos/configuration.nix
+        if ! grep -q $package $config_file; then
+            echo "Installing $package"
+            sudo sed -i "/environment.systemPackages = with pkgs; \[/a \  $package" $config_file
+        fi
+        sudo nixos-rebuild switch 
+        ;;
+    *)
+        echo "No package manager found!"
+        echo "Please install neovim, git, curl, and zsh"
+        ;;
+esac
 echo "Packages installed!"
 
 sleep 3
