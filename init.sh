@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x 
+#set -x 
 original_dir=$(pwd)
 # This script is for deploying my dotfiles to a new system.
 # neovim, git, curl, and zsh are required for this script to work.
