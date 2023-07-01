@@ -127,7 +127,7 @@ if [ ! -d $ZSH_URL/.git ]; then
             exit 1
         fi
         cd $ZSH_DIR
-        . ./init.sh
+        . ./init_zsh.sh
         cd $original_dir
         touch .jpducky_zsh
     done
@@ -144,7 +144,7 @@ while [ ! -f .jpducky_nvim ]; do
         exit 1
     fi
     cd $NVIM_DIR
-    . ./init.sh
+    . ./init_nvim.sh
     cd $original_dir
     touch .jpducky_nvim
 done
