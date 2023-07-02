@@ -124,9 +124,7 @@ if [ ! -d $ZSH_URL/.git ]; then
             echo "Failed to clone zsh config"
             exit 1
         fi
-        cd $ZSH_DIR
-        . ./init_zsh.sh
-        cd $original_dir
+        . $ZSH_DIR:/init_zsh.sh
         touch .jpducky_zsh
     done
 else 
@@ -141,9 +139,7 @@ while [ ! -f .jpducky_nvim ]; do
         echo "Failed to clone neovim config"
         exit 1
     fi
-    cd $NVIM_DIR
-    . ./init_nvim.sh
-    cd $original_dir
+    . $NVIM_URL/init_nvim.sh
     touch .jpducky_nvim
 done
 sleep 2
@@ -180,6 +176,7 @@ else
     else
         echo "Changing editor to nvim"
         export EDITOR=nvim
+    fi
 fi
 echo "Done!"
 exit 0
