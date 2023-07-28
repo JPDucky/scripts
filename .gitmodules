@@ -1,0 +1,3 @@
+[submodule "dynamic_workspaces"]
+	path = dynamic_workspaces
+	url = https://github.com/d86leader/dynamic_workspaces.git
