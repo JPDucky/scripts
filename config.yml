@@ -1,0 +1,64 @@
+---
+- hosts: all
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Check to see if neovim is installed
+      command: which nvim
+      register: nvim_check
+      changed_when: false
+
+    - name: Clone nvim config
+      git: 
+        repo: "{{ nvim_url }}"
+        dest: "{{ nvim_dir }}"
+
+    - name: Install packages
+      package:
+        name: "{{ packages }}"
+        state: present
+      register: pkg_install
+
+    - name: Validate nvim
+      assert:
+        that: nvim_check.rc == 0
+        msg: "nvim was not installed correctly"
+      when: pkg_install is changed
+
+    - name: Check for nvim config exist
+      stat:
+        path: "{{ nvim_config_dir }}"
+      register: nvim_config
+
+    - name: Clone nvim config
+      git:
+        repo: "{{ nvim_repo }}"
+        dest: "{{ nvim_config_dir }}"
+        when: not nvim_config.stat.exists'
+
+
+
+
+
+    - name: Clone zsh config
+      git:
+        repo: "{{ zsh_url }}"
+        dest: "{{ zsh_dir }}"
+
+    - name: Clone neovim config
+      git:
+        repo: "{{ nvim_url }}"
+        dest: "{{ nvim_dir }}"
+
+    - name: Set shell to zsh
+      user:
+        shell: /bin/zsh
+
+    - name: Set editor to nvim
+      lineinfile:
+        path: ~/.bashrc
+        regexp: '^export EDITOR'
+        line: 'export EDITOR=nvim'

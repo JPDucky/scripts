@@ -1,0 +1,15 @@
+---
+nvim_url: https://github.com/JPDucky/nvim.git
+nvim_dir: ~/.config/nvim
+
+lazyvim_url: https://github.com/folke/lazyvim.git
+lazyvim_dir: ~/.config/nvim-LazyVim
+
+zsh_url: https://github.com/JPDucky/.zsh.git
+zsh_dir: ~/.zsh
+
+packages:
+  - nvim
+  - git
+  - curl
+  - zsh

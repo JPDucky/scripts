@@ -1,0 +1,65 @@
+---
+- hosts: all
+  become: true
+
+  handlers:
+    - name: restart shell
+      command: exec $SHELL
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+
+    # Install and configure neovim
+
+    - name: Check if nvim config exists 
+      git:
+        repo: https://github.com/JPDucky/nvim.git
+        dest: ~/.config/nvim
+      check_mode: true
+      register: nvim_config_check
+
+    - name: Install and configure nvim
+      block:
+
+      - name: Clone nvim config
+        git:
+           repo: https://github.com/JPDucky/nvim.git  
+           dest: ~/.config/nvim
+        when: not nvim_config_check.changed
+
+      - name: Flush handlers
+        meta: flush_handlers
+
+    # Install and configure LazyVim
+
+    - name: Check if LazyVim config exists
+      git:
+        repo: https://github.com/JPDucky/nvim-LazyVim
+        dest: ~/.config/nvim-lazyvim
+      check_mode: true
+      register: lazyvim_config_check
+
+    - name: Clone LazyVim config
+      git:
+        repo: https://github.com/JPDucky/nvim-LazyVim
+        dest: ~/.config/nvim-lazyvim
+      when: not lazyvim_config_check.changed
+
+    - name: Flush handlers
+      meta: flush_handlers
+
+    # Install and configure zsh
+
+    - name: Clone zsh config
+      git:
+        repo: https://github.com/JPDucky/.zsh.git
+        dest: ~/.zsh
+
+    - name: Flush handlers
+      meta: flush_handlers
+
+    - name: Set default shell to zsh
+      user:
+        shell: /bin/zsh
